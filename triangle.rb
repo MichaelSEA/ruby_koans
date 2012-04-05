@@ -14,7 +14,22 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  # WRITE THIS CODE
+  if (a != b) && (b != c) && (a != c)
+    return :scalene
+  elsif (a == b) && (b == c) && (a == c)
+    return :equilateral
+  else
+    array = [a,b,c]
+    if array.min <= 0
+      raise TriangleError.new
+    end
+    max = array.max
+    sum_of_two_sides = array.inject(:+) - max
+    if sum_of_two_sides <= max
+      raise TriangleError.new
+    end
+    return :isosceles
+  end
 end
 
 # Error class used in part 2.  No need to change this code.

@@ -14,21 +14,23 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
+  array = [a,b,c]
+  max = array.max
+  min = array.min
+  if array.min <= 0
+    raise TriangleError.new("zero or negative length sides not permitted")
+  end
+  sum_of_two_sides = array.inject(:+) - max
+  if sum_of_two_sides <= max
+    raise TriangleError.new("sum of two sides must be > biggest side")
+  end
+
   if (a != b) && (b != c) && (a != c)
     return :scalene
-  elsif (a == b) && (b == c) && (a == c)
+  elsif (a == b) && (b == c) && (a == c) && (a != 0)
     return :equilateral
   else
-    array = [a,b,c]
-    if array.min <= 0
-      raise TriangleError.new
-    end
-    max = array.max
-    sum_of_two_sides = array.inject(:+) - max
-    if sum_of_two_sides <= max
-      raise TriangleError.new
-    end
-    return :isosceles
+   return :isosceles
   end
 end
 
